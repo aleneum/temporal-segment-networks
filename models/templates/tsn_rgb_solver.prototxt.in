@@ -1,0 +1,32 @@
+net: "models/tsn_rgb_train.prototxt"
+
+# testing parameter
+test_iter: 950
+test_interval: 500
+test_initialization: true
+
+# output
+display: 20
+average_loss: 20
+snapshot: 1000
+snapshot_prefix: "/generated/models/tsn_rgb"
+debug_info: false
+
+# learning rate
+base_lr: 0.001
+lr_policy: "step"
+gamma: 0.1
+stepsize: 1500
+max_iter: 4000
+iter_size: @ITER_SIZE@
+
+# parameter of SGD
+momentum: 0.9
+weight_decay: 0.0005
+clip_gradients: 40
+
+# GPU setting
+solver_mode: GPU
+device_id: @GPU_IDS@
+richness: 200
+
