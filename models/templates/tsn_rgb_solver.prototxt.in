@@ -1,4 +1,4 @@
-net: "models/tsn_rgb_train.prototxt"
+net: "/generated/models/tsn_rgb_train.prototxt"
 
 # testing parameter
 test_iter: 950
@@ -27,6 +27,6 @@ clip_gradients: 40
 
 # GPU setting
 solver_mode: GPU
-device_id: @GPU_IDS@
+device_id: [@GPU_IDS@]
 richness: 200
 
