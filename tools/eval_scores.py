@@ -1,7 +1,7 @@
 import argparse
 import sys
 import numpy as np
-sys.path.append('.')
+sys.path.append('/tsn_caffe')
 
 from pyActionRecog.utils.video_funcs import default_aggregation_func
 from pyActionRecog.utils.metrics import mean_class_accuracy

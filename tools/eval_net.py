@@ -1,5 +1,9 @@
-import os
 import sys
+
+sys.path.append('/tsn_caffe')
+sys.path.append('/tsn_caffe/lib/caffe-action/python')
+
+import os
 import cv2
 import numpy as np
 import multiprocessing
@@ -7,8 +11,6 @@ from sklearn.metrics import confusion_matrix
 import pickle
 import argparse
 
-sys.path.append('.')
-sys.path.append('./lib/caffe-action/python')
 from pyActionRecog import parse_directory
 from pyActionRecog.utils.video_funcs import default_aggregation_func
 from pyActionRecog.action_caffe import CaffeNet
@@ -16,30 +18,27 @@ from pyActionRecog.action_caffe import CaffeNet
 parser = argparse.ArgumentParser(description="Evaluate trained model")
 parser.add_argument("modality")
 parser.add_argument("model")
-parser.add_argument("--num_gpu", default=1)
-parser.add_argument("--num_worker", default=2)
+parser.add_argument("--num_gpu", default=1, type=int)
+parser.add_argument("--num_worker", default=2, type=int)
 args = parser.parse_args()
 
 modality = args.modality
 gpu_list = range(args.num_gpu)
-num_worker = args.num_worker
-
-# to be parsed
-feature_dir = '@FEATURE_DIR@'
+num_worker = min(args.num_worker, args.num_gpu)
 
 # default values
-data_dir = feature_dir + '/data'
-frame_dir = feature_dir + '/frames'
+data_dir = '/generated/data'
+frame_dir = '/generated/frames'
 num_frame_per_video = 25
 net_weights = '/generated/models/' + args.model
-net_proto = 'models/tsn_{0}_deploy.prototxt'.format(modality)
+net_proto = '/tsn_caffe/tsn_{0}_deploy.prototxt'.format(modality)
 rgb_prefix = 'img_'
 flow_x_prefix = 'flow_x_'
 flow_y_prefix = 'flow_y_'
 
 f_info = parse_directory(frame_dir, 'img_', 'flow_x', 'flow_y')
 eval_video_list = []
-with open('/generated/{0}_val_split.txt'.format(modality)) as f:
+with open('/generated/data/{0}_val_split.txt'.format(modality)) as f:
     for l in f.readlines():
         # /folder/to/frame_folder num_images class -> (frame_folder, class)
         tmp = l.split('/')[-1].split(' ')
@@ -113,7 +112,7 @@ else:
     video_scores = map(eval_video, eval_video_list)
 
 video_pred = [np.argmax(default_aggregation_func(x[0])) for x in video_scores]
-video_labels = [x[1] for x in video_scores]
+video_labels = [int(x[1]) for x in video_scores]
 
 cf = confusion_matrix(video_labels, video_pred).astype(float)
 
