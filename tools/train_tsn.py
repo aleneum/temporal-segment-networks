@@ -8,7 +8,7 @@ parser.add_argument("modality")
 parser.add_argument("--num_gpu", default=1, type=int)
 parser.add_argument("--batch_size", default=8, type=int)
 parser.add_argument("--iter_size", type=int)
-parser.add_argument("--snapshot")
+parser.add_argument("--snapshot", help="Resume from solverstate")
 args = parser.parse_args()
 
 iter_size = 128 / args.num_gpu / args.batch_size if not args.iter_size else args.iter_size
