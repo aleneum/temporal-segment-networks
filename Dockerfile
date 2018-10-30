@@ -47,3 +47,6 @@ RUN wget https://yjxiong.blob.core.windows.net/models/bn_inception-9f5701afb96c8
 # ADD https://yjxiong.blob.core.windows.net/models/bn_inception-9f5701afb96c8044.pth \
 #    https://yjxiong.blob.core.windows.net/models/inceptionv3-cuhk-0e09b300b493bc74c.pth \
 #    /tsn_pytorch/models/
+
+RUN python /tsn_pytorch/convert_pth.py /tsn_pytorch/models/bn_inception-9f5701afb96c8044.pth && \
+    python /tsn_pytorch/convert_pth.py /tsn_pytorch/models/inceptionv3-cuhk-0e09b300b493bc74c.pth
