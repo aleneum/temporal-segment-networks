@@ -19,7 +19,7 @@ RUN wget https://cmake.org/files/v3.12/cmake-3.12.3-Linux-x86_64.sh -P / && sh c
 
 RUN git clone --depth 1 --recurse-submodules https://github.com/aleneum/temporal-segment-networks.git /tsn_caffe
 RUN wget https://yjxiong.blob.core.windows.net/tsn-init/bn_inception_rgb_init.caffemodel -P /tsn_caffe/models && \
-    wget https://yjxiong.blob.core.windows.net/tsn-init/bn_inception_flow_init.caffemodel
+    wget https://yjxiong.blob.core.windows.net/tsn-init/bn_inception_flow_init.caffemodel -P /tsn_caffe/models
 
 # ADD https://yjxiong.blob.core.windows.net/tsn-init/bn_inception_rgb_init.caffemodel \
 #    https://yjxiong.blob.core.windows.net/tsn-init/bn_inception_flow_init.caffemodel \
