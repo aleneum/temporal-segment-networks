@@ -17,7 +17,7 @@ base_lr: 0.005
 lr_policy: "multistep"
 gamma: 0.1
 stepvalue: [10000, 16000]
-max_iter: 18000
+max_iter: @MAX_ITER@
 iter_size: @ITER_SIZE@
 
 # parameter of SGD

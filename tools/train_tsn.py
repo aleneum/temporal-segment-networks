@@ -8,11 +8,17 @@ parser.add_argument("modality")
 parser.add_argument("--num_gpu", default=1, type=int)
 parser.add_argument("--batch_size", default=8, type=int)
 parser.add_argument("--iter_size", type=int)
+parser.add_argument("--max_iter", type=int)
 parser.add_argument("--snapshot", help="Resume from solverstate")
 args = parser.parse_args()
 
 iter_size = 128 / args.num_gpu / args.batch_size if not args.iter_size else args.iter_size
 gpu_ids = ','.join([str(i) for i in range(args.num_gpu)])
+
+if not args.max_iter:
+    max_iter = 4000 if args.modality == "rgb" else 18000
+else:
+    max_iter = args.max_iter
 
 with open('/tsn_caffe/models/templates/tsn_{0}_train.prototxt.in'.format(args.modality)) as f:
     content = f.read().replace("@BATCH_SIZE@", str(args.batch_size))
@@ -20,7 +26,8 @@ with open('/generated/models/tsn_{0}_train.prototxt'.format(args.modality), 'w')
     f.write(content)
 
 with open('/tsn_caffe/models/templates/tsn_{0}_solver.prototxt.in'.format(args.modality)) as f:
-    content = f.read().replace("@ITER_SIZE@", str(iter_size)).replace("@GPU_IDS@", gpu_ids)
+    content = f.read().replace("@ITER_SIZE@", str(iter_size)).replace("@GPU_IDS@", gpu_ids)\
+                      .replace("@MAX_ITER@", str(max_iter))
 with open('/generated/models/tsn_{0}_solver.prototxt'.format(args.modality), 'w') as f:
     f.write(content)
 
