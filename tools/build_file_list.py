@@ -1,5 +1,5 @@
 import sys
-sys.path.append('.')
+sys.path.append('/tsn_caffe')
 import pickle
 import argparse
 import os.path
