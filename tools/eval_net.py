@@ -44,7 +44,7 @@ with open('/generated/data/{0}_val_split.txt'.format(modality)) as f:
         tmp = l.split('/')[-1].split(' ')
         eval_video_list.append((tmp[0], tmp[2]))
 
-result_name = 'test_result_{0}'.format(modality)
+result_name = 'tsn_caffe_{0}_scores.npz'.format(modality)
 score_name = 'fc-action'
 
 def build_net():
