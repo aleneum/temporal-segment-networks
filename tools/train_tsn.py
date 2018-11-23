@@ -36,7 +36,7 @@ cmd = ['mpirun', '-np' ,str(args.num_gpu), '/tsn_caffe/lib/caffe-action/build/in
        '-gpu', gpu_ids]
 
 if args.snapshot:
-    cmd.append('--snapshot=/generated/models/{0}'.format(args.snapshot))
+    cmd.append('--snapshot=' + args.snapshot)
 else:
     cmd.append('--weights=/tsn_caffe/models/bn_inception_{0}_init.caffemodel'.format(args.modality))
 
