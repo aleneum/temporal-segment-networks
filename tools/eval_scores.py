@@ -39,4 +39,5 @@ for i, agg_score in enumerate(agg_score_list):
 
 # accuracy
 acc = mean_class_accuracy(final_scores, label_list[0])
-print 'Final accuracy {:02f}%'.format(acc * 100)
+print('Labels:' + str(final_scores))
+print('Final accuracy {:02f}%'.format(acc * 100))
