@@ -38,6 +38,6 @@ for i, agg_score in enumerate(agg_score_list):
     final_scores += agg_score * score_weights[i]
 
 # accuracy
-acc = mean_class_accuracy(final_scores, label_list[0])
-print('Labels:' + str(final_scores))
-print('Final accuracy {:02f}%'.format(acc * 100))
+acc, cls_acc = mean_class_accuracy(final_scores, label_list[0])
+print('Classes results: ' + str(['{:02.2f}%'.format(a * 100) for a in cls_acc]))
+print('Final accuracy {:02.2f}%'.format(acc * 100))
