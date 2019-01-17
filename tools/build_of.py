@@ -87,8 +87,7 @@ if __name__ == '__main__':
     parser.add_argument("--num_worker", type=int, default=8)
     parser.add_argument("--flow_type", type=str, default='tvl1', choices=['tvl1', 'warp_tvl1'])
     parser.add_argument("--df_path", type=str, default='/tsn_caffe/lib/dense_flow/', help='path to the dense_flow toolbox')
-    parser.add_argument("--out_format", type=str, default='dir', choices=['dir','zip'],
-                        help='path to the dense_flow toolbox')
+    parser.add_argument("--out_format", type=str, default='dir', choices=['dir','zip'], help='path to the dense_flow toolbox')
     parser.add_argument("--ext", type=str, default='avi', choices=['avi','mp4'], help='video file extensions')
     parser.add_argument("--new_width", type=int, default=0, help='resize image width')
     parser.add_argument("--new_height", type=int, default=0, help='resize image height')
