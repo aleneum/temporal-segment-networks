@@ -9,6 +9,7 @@ parser.add_argument("--num_gpu", default=1, type=int)
 parser.add_argument("--batch_size", default=8, type=int)
 parser.add_argument("--iter_size", type=int)
 parser.add_argument("--max_iter", type=int)
+parser.add_argument("--kinetics", action='store_true', default=False)
 parser.add_argument("--snapshot", help="Resume from solverstate")
 args = parser.parse_args()
 
@@ -38,7 +39,8 @@ cmd = ['mpirun', '-np' ,str(args.num_gpu), '/tsn_caffe/lib/caffe-action/build/in
 if args.snapshot:
     cmd.append('--snapshot=' + args.snapshot)
 else:
-    cmd.append('--weights=/tsn_caffe/models/bn_inception_{0}_init.caffemodel'.format(args.modality))
+    init_weights = '/tsn_caffe/models/bn_inception_{0}_pretrained.caffemodel' if args.kinetics else '/tsn_caffe/models/bn_inception_{0}_init.caffemodel'
+    cmd.append('--weights=/tsn_caffe/models/' + init_weights.format(args.modality))
 
 time_str = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
 logfile = open('/generated/tsn_{0}_{1}_training.log'.format(time_str, args.modality), 'w')
