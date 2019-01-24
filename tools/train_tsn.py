@@ -39,7 +39,7 @@ cmd = ['mpirun', '-np' ,str(args.num_gpu), '/tsn_caffe/lib/caffe-action/build/in
 if args.snapshot:
     cmd.append('--snapshot=' + args.snapshot)
 else:
-    init_weights = '/tsn_caffe/models/bn_inception_{0}_pretrained.caffemodel' if args.kinetics else '/tsn_caffe/models/bn_inception_{0}_init.caffemodel'
+    init_weights = 'bn_inception_{0}_pretrained.caffemodel' if args.kinetics else 'bn_inception_{0}_init.caffemodel'
     cmd.append('--weights=/tsn_caffe/models/' + init_weights.format(args.modality))
 
 time_str = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
